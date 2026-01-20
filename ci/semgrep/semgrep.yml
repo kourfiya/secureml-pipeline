@@ -1,9 +1,9 @@
 rules:
-  - id: python-hardcoded-secret
-    pattern-regex: "(AKIA|ASIA)[0-9A-Z]{16}"
-    message: "Possible hardcoded AWS credential"
-    severity: ERROR
-    languages: [python]
+- id: python-hardcoded-secret
+  pattern-regex: "(AKIA|ASIA)[0-9A-Z]{16}"
+  message: "Possible hardcoded AWS credential"
+  severity: ERROR
+  languages: [python]
 
   - id: python-eval-use
     pattern: eval(...)
