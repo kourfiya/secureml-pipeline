@@ -12,5 +12,9 @@ pipeline for machine learning model training and deployment.
 ## Local Run
 ```bash
 pip install scikit-learn pandas
+<<<<<<< HEAD
 python ml/train.py
 cod
+=======
+python ml/train.py
+>>>>>>> 3513dc8 (init)
