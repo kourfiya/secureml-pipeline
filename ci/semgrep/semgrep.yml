@@ -1,0 +1,14 @@
+rules:
+  - id: python-hardcoded-secret
+    patterns:
+      - pattern: |
+          $X = "AKIA..."
+    message: "Possible hardcoded AWS secret"
+    severity: ERROR
+    languages: [python]
+
+  - id: python-eval-use
+    pattern: eval(...)
+    message: "Avoid using eval()"
+    severity: WARNING
+    languages: [python]
