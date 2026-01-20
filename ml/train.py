@@ -24,3 +24,7 @@ joblib.dump(model, "ml/model_baseline.joblib")
 print("Model saved as ml/model_baseline.joblib")
 
 AWS_SECRET = "AKIA123456789ABCDE" 
+AWS_SECRET2 = "AKIA123456789ABCDE"
+user_input = "2+2"
+result = eval(user_input)
+
