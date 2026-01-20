@@ -13,8 +13,13 @@ pipeline for machine learning model training and deployment.
 ```bash
 pip install scikit-learn pandas
 <<<<<<< HEAD
+<<<<<<< HEAD
 python ml/train.py
 cod
 =======
 python ml/train.py
 >>>>>>> 3513dc8 (init)
+=======
+python ml/train.py
+cod
+>>>>>>> (feat/DSO-2.1)init
