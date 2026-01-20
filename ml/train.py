@@ -23,8 +23,4 @@ print(f"Baseline Accuracy: {accuracy:.4f}")
 joblib.dump(model, "ml/model_baseline.joblib")
 print("Model saved as ml/model_baseline.joblib")
 
-<<<<<<< HEAD
-AWS_SECRET = "AKIA123456789ABCDE"
-=======
 AWS_SECRET = "AKIA123456789ABCDE" 
->>>>>>> (feat/DSO-2.1)init
