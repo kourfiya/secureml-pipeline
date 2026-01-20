@@ -1,12 +1,42 @@
 rules:
-  - id: python-hardcoded-secret
+  - id: aws-access-key
     pattern-regex: "(AKIA|ASIA)[0-9A-Z]{16}"
-    message: "Possible hardcoded AWS credential"
+    message: "Hardcoded AWS access key detected"
     severity: ERROR
     languages: [python]
 
-  - id: python-eval-use
-    pattern: eval(...)
-    message: "Avoid using eval()"
+  - id: hardcoded-secret
+    pattern-regex: "(password|secret|token|api_key)\s*=\s*['\"].+['\"]"
+    message: "Hardcoded secret detected"
     severity: ERROR
+    languages: [python]
+
+  - id: python-eval
+    pattern: eval(...)
+    message: "Use of eval() is dangerous"
+    severity: ERROR
+    languages: [python]
+
+  - id: python-exec
+    pattern: exec(...)
+    message: "Use of exec() is dangerous"
+    severity: ERROR
+    languages: [python]
+
+  - id: unsafe-pickle-load
+    pattern: pickle.load(...)
+    message: "Untrusted pickle load can execute arbitrary code"
+    severity: ERROR
+    languages: [python]
+
+  - id: subprocess-shell-true
+    pattern: subprocess.run(..., shell=True)
+    message: "shell=True can lead to command injection"
+    severity: ERROR
+    languages: [python]
+
+  - id: flask-debug
+    pattern: app.run(debug=True)
+    message: "Debug mode should not be enabled"
+    severity: WARNING
     languages: [python]
