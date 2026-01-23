@@ -21,9 +21,4 @@ accuracy = accuracy_score(y_test, preds)
 print(f"Baseline Accuracy: {accuracy:.4f}")
 
 joblib.dump(model, "ml/model_baseline.joblib")
-<<<<<<< HEAD
 print("Model saved as ml/model_baseline.joblib")
-=======
-print("Model saved as ml/model_baseline.joblib")
-
->>>>>>> test-sast
