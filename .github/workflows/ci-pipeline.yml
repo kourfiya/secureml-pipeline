@@ -41,7 +41,7 @@ jobs:
           python -m unittest discover -s ml/tests
 
       - name: Upload pip-audit report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: pip-audit-report
           path: reports/pip-audit.json
