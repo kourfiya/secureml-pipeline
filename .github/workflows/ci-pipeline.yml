@@ -23,12 +23,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Dependency scan (Trivy)
+      - name: Dependency scan
         uses: aquasecurity/trivy-action@0.24.0
         with:
           scan-type: fs
           scan-ref: .
-          scanners: vuln,sbom 
+          scanners: vuln
           severity: ${{ inputs.severity || 'HIGH,CRITICAL' }}
           exit-code: 1
           output: reports/trivy-report.json
