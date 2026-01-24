@@ -7,7 +7,7 @@ mlflow>=3.5.0,<4.0.0
 pandera>=0.23.0,<0.24.0
 
 fastapi>=0.109.0
-uvicorn>=0.23.0,<0.24.0
+uvicorn>=0.35,<0.40
 
 python-dotenv>=1.0.0,<2.0.0
 requests>=2.32.0,<3.0.0
