@@ -5,26 +5,40 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: "0 4 * * *"  # daily scan at 4 AM
 
 jobs:
 
   # =========================
   # STAGE 1 — SECURITY
   # =========================
-  security:
-    name: Security Stage
+  gitleaks:
+    name: Secrets Detection (Gitleaks)
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Gitleaks — Secrets detection
-        uses: gitleaks/gitleaks-action@v2
+        uses: actions/checkout@v4
         with:
-          fail: true
+          fetch-depth: 0
 
-      - name: Semgrep — SAST
+      - name: Run Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  sast:
+    name: Static App Security Testing (Semgrep)
+    runs-on: ubuntu-latest
+    needs: gitleaks
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Semgrep scan
         uses: returntocorp/semgrep-action@v1
         with:
           config: "p/ci"
@@ -49,18 +63,17 @@ jobs:
           name: security-reports
           path: reports/
 
-
   # =========================
   # STAGE 2 — QUALITY
   # =========================
   quality:
     name: Quality Stage
     runs-on: ubuntu-latest
-    needs: security
+    needs: sast
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Python
         uses: actions/setup-python@v4
@@ -76,7 +89,6 @@ jobs:
         run: |
           python -m unittest discover -s ml/tests
 
-
   # =========================
   # STAGE 3 — ML TRAINING
   # =========================
@@ -87,7 +99,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Python
         uses: actions/setup-python@v4
