@@ -23,6 +23,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Prepare reports directory
+        run: mkdir -p reports
+
       - name: Dependency scan
         uses: aquasecurity/trivy-action@0.24.0
         with:
@@ -42,9 +45,3 @@ jobs:
       - name: Run ML tests
         run: |
           python -m unittest discover -s ml/tests
-
-      - name: Upload Trivy SBOM + vulnerability report
-        uses: actions/upload-artifact@v4
-        with:
-          name: trivy-report
-          path: reports/trivy-report.json
